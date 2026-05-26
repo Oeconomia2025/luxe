@@ -176,6 +176,22 @@
 
   .nav-links a:hover::after { width: 100%; }
 
+  /* "back to beginning" home icon link */
+  .nav-links a.nav-home,
+  .mobile-nav a.nav-home {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-links a.nav-home svg,
+  .mobile-nav a.nav-home svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+  }
+  /* don't show the underline accent under the icon link */
+  .nav-links a.nav-home::after { display: none; }
+
   /* Mobile category strip — hidden on desktop, shown ≤900px */
   .mobile-nav {
     display: none;
@@ -456,7 +472,40 @@
   .hero-side-label { display: none; }
 
   /* Marquee removed for the minimal designer look */
-  .marquee { display: none; }
+  /* Ticker tape below the landing banner */
+  .marquee {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    overflow: hidden;
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 0;
+  }
+
+  .marquee-track {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    animation: marquee-scroll 42s linear infinite;
+    font-family: 'Hanken Grotesk', system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .marquee-track > span { margin: 0 26px; }
+  .marquee-track .sep { color: var(--ink-mute); font-weight: 400; letter-spacing: 0; }
+
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
 
   /* ============ SECTION ============ */
   .section {
@@ -1617,6 +1666,9 @@
   <div class="top-strip">Complimentary shipping over $75 &nbsp;·&nbsp; <b>New pieces every Friday</b></div>
   <nav>
     <div class="nav-links">
+      <a class="nav-home" onclick="navigate('home')" aria-label="Back to start">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5v14"/><path d="M20 12H9"/><path d="m14 6-5 6 5 6"/></svg>
+      </a>
       <a onclick="navigate('shop')">Shop All</a>
       <a onclick="navigate('category/hats')">Hats</a>
       <a onclick="navigate('category/shirts')">Shirts</a>
@@ -1637,6 +1689,9 @@
     </div>
   </nav>
   <div class="mobile-nav">
+    <a class="nav-home" onclick="navigate('home')" aria-label="Back to start">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5v14"/><path d="M20 12H9"/><path d="m14 6-5 6 5 6"/></svg>
+    </a>
     <a onclick="navigate('shop')">Shop All</a>
     <a onclick="navigate('category/hats')">Hats</a>
     <a onclick="navigate('category/shirts')">Shirts</a>
@@ -1661,16 +1716,16 @@
       </div>
     </div>
 
-    <div class="marquee">
+    <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
-        <span class="serif gold-text">Curated Looks</span><span class="star">/</span>
-        <span class="serif pink-text">Custom Energy</span><span class="star">/</span>
-        <span class="serif gold-text">Free Shipping $75+</span><span class="star">/</span>
-        <span class="serif pink-text">New Drops Fridays</span><span class="star">/</span>
-        <span class="serif gold-text">Curated Looks</span><span class="star">/</span>
-        <span class="serif pink-text">Custom Energy</span><span class="star">/</span>
-        <span class="serif gold-text">Free Shipping $75+</span><span class="star">/</span>
-        <span class="serif pink-text">New Drops Fridays</span><span class="star">/</span>
+        <span>Fall / Winter 2026 — Volume One</span><span class="sep">◇</span>
+        <span>Complimentary shipping over $75</span><span class="sep">◇</span>
+        <span>New pieces every Friday</span><span class="sep">◇</span>
+        <span>Curated looks · Custom energy</span><span class="sep">◇</span>
+        <span>Fall / Winter 2026 — Volume One</span><span class="sep">◇</span>
+        <span>Complimentary shipping over $75</span><span class="sep">◇</span>
+        <span>New pieces every Friday</span><span class="sep">◇</span>
+        <span>Curated looks · Custom energy</span><span class="sep">◇</span>
       </div>
     </div>
 
