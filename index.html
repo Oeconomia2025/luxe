@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luxe Accessories — Curated Looks, Custom Energy</title>
-<meta name="description" content="Luxe Accessories — curated hats, shirts, and accessories. Custom energy in every piece.">
+<title>Luxe Accessories: Curated Looks, Custom Energy</title>
+<meta name="description" content="Luxe Accessories. Curated hats, shirts, and accessories. Custom energy in every piece.">
 
 <!-- Favicons -->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
@@ -22,7 +22,7 @@
 
 <style>
   :root {
-    /* Dark mode — warm near-black, bone ink (Modern Street-Luxe) */
+    /* Dark mode: warm near-black, bone ink (Modern Street-Luxe) */
     --bg: #14130f;
     --bg-elevated: #1a1813;
     --bg-sunken: #100f0c;
@@ -102,7 +102,7 @@
     font-weight: 400;
   }
 
-  /* Retired the shiny gradient text — designer-clean solid tones */
+  /* Retired the shiny gradient text. Designer-clean solid tones. */
   .gold-text { color: var(--gold); }
   .pink-text { color: var(--ink); }
 
@@ -192,7 +192,7 @@
   /* don't show the underline accent under the icon link */
   .nav-links a.nav-home::after { display: none; }
 
-  /* Mobile category strip — hidden on desktop, shown ≤900px */
+  /* Mobile category strip: hidden on desktop, shown when ≤900px */
   .mobile-nav {
     display: none;
     gap: 8px;
@@ -1733,7 +1733,7 @@
   <!-- ========== HOME ========== -->
   <section class="page active" id="page-home">
     <div class="hero-banner">
-      <img src="assets/landing-header.png" alt="Luxe — Fall / Winter 2026 collection">
+      <img src="assets/landing-header.png" alt="Luxe: Fall / Winter 2026 collection">
       <div class="hero-overlay">
         <div class="hero-overlay-inner">
           <img class="hero-logo" src="assets/luxe-full.png" alt="Luxe Accessories">
@@ -1746,11 +1746,11 @@
 
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
-        <span>Fall / Winter 2026 — Volume One</span><span class="sep">◇</span>
+        <span>Fall / Winter 2026, Volume One</span><span class="sep">◇</span>
         <span>Complimentary shipping over $75</span><span class="sep">◇</span>
         <span>New pieces every Friday</span><span class="sep">◇</span>
         <span>Curated looks · Custom energy</span><span class="sep">◇</span>
-        <span>Fall / Winter 2026 — Volume One</span><span class="sep">◇</span>
+        <span>Fall / Winter 2026, Volume One</span><span class="sep">◇</span>
         <span>Complimentary shipping over $75</span><span class="sep">◇</span>
         <span>New pieces every Friday</span><span class="sep">◇</span>
         <span>Curated looks · Custom energy</span><span class="sep">◇</span>
@@ -1847,7 +1847,7 @@
     <div class="section">
       <div class="section-header">
         <h2 class="section-title" id="categoryTitle">Category</h2>
-        <div class="section-num" id="categoryNum">— 00 / Pieces</div>
+        <div class="section-num" id="categoryNum">00 PIECES</div>
       </div>
       <div class="product-grid" id="categoryGrid"></div>
     </div>
@@ -1931,7 +1931,7 @@
     { id: 'luxe-maxi-dress', name: 'The Luxe Maxi Dress', category: 'dresses', categoryName: 'Dresses',
       image: 'assets/products/1st Pink.png',
       price: 88, badge: 'NEW', badgeStyle: 'pink',
-      desc: 'A floor-length bodycon maxi with the signature gold Luxe wordmark across the chest, contrast racing stripe down the side, and a high thigh slit. Soft stretch cotton-modal that moves with you — sport energy, evening finish.',
+      desc: 'A floor-length bodycon maxi with the signature gold Luxe wordmark across the chest, contrast racing stripe down the side, and a high thigh slit. Soft stretch cotton-modal that moves with you. Sport energy, evening finish.',
       sizes: ['XS','S','M','L','XL','XXL'],
       colors: [
         {name:'Blush Pink', hex:'#f4b8c8', images:['assets/products/1st Pink.png','assets/products/1st Pink Zoom.png','assets/products/2nd Pink.png']},
@@ -2106,7 +2106,7 @@
     const filtered = PRODUCTS.filter(p => p.category === cat);
     const titles = { hats: 'Hats', shirts: 'Shirts', dresses: 'Dresses', accessories: 'Accessories' };
     document.getElementById('categoryTitle').innerHTML = `<em class="gold-text">${titles[cat] || 'Category'}</em>`;
-    document.getElementById('categoryNum').textContent = `— ${String(filtered.length).padStart(2,'0')} PIECES`;
+    document.getElementById('categoryNum').textContent = `${String(filtered.length).padStart(2,'0')} PIECES`;
     renderGrid('categoryGrid', filtered);
   }
 
@@ -2178,7 +2178,7 @@
 
         <div class="pd-actions">
           <button class="btn btn-large" onclick="addToCart()">
-            Add to Bag — $<span id="totalPrice">${p.price}</span>
+            Add to Bag: $<span id="totalPrice">${p.price}</span>
           </button>
           <button class="btn-icon" aria-label="Save">
             <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/></svg>
@@ -2216,7 +2216,7 @@
     document.getElementById('reviewsSection').innerHTML = `
       <div class="section-header" style="margin-bottom: 40px; padding-bottom: 24px;">
         <h2 class="section-title">What people <em class="pink-text">say</em></h2>
-        <div class="section-num">— 127 Reviews · 4.8 ★</div>
+        <div class="section-num">127 Reviews · 4.8 ★</div>
       </div>
       ${REVIEWS.map(r => `
         <div class="review">
@@ -2351,7 +2351,7 @@
     el.innerHTML = `
       <div class="cart-header">
         <h2 class="section-title">Your <em class="pink-text">Bag</em></h2>
-        <div class="section-num">— ${cart.length} Item${cart.length===1?'':'s'}</div>
+        <div class="section-num">${cart.length} Item${cart.length===1?'':'s'}</div>
       </div>
 
       <div>
