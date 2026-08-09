@@ -138,9 +138,9 @@
     margin: 0 auto;
     padding: 13px 32px;
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    gap: 24px;
+    gap: 40px;
   }
 
   .nav-links {
@@ -149,7 +149,8 @@
     align-items: center;
   }
 
-  .nav-links a {
+  .nav-links > a,
+  .shop-wrap > a {
     color: var(--ink-soft);
     text-decoration: none;
     font-size: 13px;
@@ -161,11 +162,13 @@
     cursor: pointer;
   }
 
-  .nav-links a:hover {
+  .nav-links > a:hover,
+  .shop-wrap > a:hover {
     color: var(--ink);
   }
 
-  .nav-links a::after {
+  .nav-links > a::after,
+  .shop-wrap > a::after {
     content: '';
     position: absolute;
     bottom: -8px; left: 0;
@@ -174,23 +177,74 @@
     transition: width 0.4s ease;
   }
 
-  .nav-links a:hover::after { width: 100%; }
+  .nav-links > a:hover::after,
+  .shop-wrap > a:hover::after { width: 100%; }
 
-  /* "back to beginning" home icon link */
-  .nav-links a.nav-home,
-  .mobile-nav a.nav-home {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+  .nav-links > a.sale-link { color: var(--gold); }
+  .nav-links > a.sale-link:hover { color: var(--gold-bright); }
+  .nav-links > a.sale-link::after { background: var(--gold); }
+
+  /* ============ SHOP ALL MEGA MENU ============ */
+  .shop-wrap { display: inline-flex; }
+
+  .mega {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow-lg);
+    visibility: hidden;
+    opacity: 0;
+    /* slight delay so the panel survives the pointer crossing the gap below the link */
+    transition: opacity 0.18s ease 0.1s, visibility 0.18s ease 0.1s;
+    z-index: 99;
   }
-  .nav-links a.nav-home svg,
-  .mobile-nav a.nav-home svg {
-    width: 16px;
-    height: 16px;
+
+  .shop-wrap:hover .mega { visibility: visible; opacity: 1; }
+  .mega.force-closed { visibility: hidden !important; opacity: 0 !important; }
+
+  .mega-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 44px 32px 52px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+
+  .mega-col-title {
     display: block;
+    color: var(--ink);
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line-soft);
+    margin-bottom: 16px;
+    transition: color 0.2s;
   }
-  /* don't show the underline accent under the icon link */
-  .nav-links a.nav-home::after { display: none; }
+
+  .mega-col-title:hover { color: var(--gold); }
+  .mega-col-title .mega-count { color: var(--ink-mute); letter-spacing: 0.18em; font-size: 10px; margin-left: 8px; }
+
+  .mega-link {
+    display: block;
+    color: var(--ink-soft);
+    font-size: 14px;
+    padding: 7px 0;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .mega-link:hover { color: var(--gold); }
+
+  /* anchored home sections land clear of the sticky header */
+  .section { scroll-margin-top: 96px; }
 
   /* Mobile category strip: hidden on desktop, shown when ≤900px */
   .mobile-nav {
@@ -307,6 +361,9 @@
     width: 100vw;
     margin-left: calc(50% - 50vw);
     aspect-ratio: 5 / 2;
+    /* cap the height so the marquee below stays visible on the first
+       screen: 100vh minus header (~108px) and marquee (~50px) */
+    max-height: calc(100vh - 170px);
     overflow: hidden;
     background: var(--bg-sunken);
   }
@@ -1794,19 +1851,20 @@
 <header>
   <div class="top-strip">Complimentary shipping over $75 &nbsp;·&nbsp; <b>New pieces every Friday</b></div>
   <nav>
-    <div class="nav-links">
-      <a class="nav-home" onclick="navigate('home')" aria-label="Back to start">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5v14"/><path d="M20 12H9"/><path d="m14 6-5 6 5 6"/></svg>
-      </a>
-      <a onclick="navigate('shop')">Shop All</a>
-      <a onclick="navigate('category/hats')">Hats</a>
-      <a onclick="navigate('category/shirts')">Shirts</a>
-      <a onclick="navigate('category/dresses')">Dresses</a>
-      <a onclick="navigate('category/accessories')">Accessories</a>
-    </div>
     <a class="brand" onclick="navigate('home')">
       <img src="assets/luxe-wordmark.png" alt="Luxe Accessories">
     </a>
+    <div class="nav-links">
+      <span class="shop-wrap">
+        <a onclick="navigate('shop')">Shop All</a>
+        <div class="mega" id="megaMenu">
+          <div class="mega-inner" id="megaInner"></div>
+        </div>
+      </span>
+      <a onclick="goToSection('homeCategories')">Categories</a>
+      <a onclick="goToSection('homeFeatured')">Featured</a>
+      <a class="sale-link" onclick="navigate('sale')">Sale</a>
+    </div>
     <div class="nav-right">
       <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
         <svg id="themeIcon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>
@@ -1818,10 +1876,10 @@
     </div>
   </nav>
   <div class="mobile-nav">
-    <a class="nav-home" onclick="navigate('home')" aria-label="Back to start">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5v14"/><path d="M20 12H9"/><path d="m14 6-5 6 5 6"/></svg>
-    </a>
     <a onclick="navigate('shop')">Shop All</a>
+    <a onclick="goToSection('homeCategories')">Categories</a>
+    <a onclick="goToSection('homeFeatured')">Featured</a>
+    <a onclick="navigate('sale')">Sale</a>
     <a onclick="navigate('category/hats')">Hats</a>
     <a onclick="navigate('category/shirts')">Shirts</a>
     <a onclick="navigate('category/dresses')">Dresses</a>
@@ -1858,7 +1916,7 @@
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" id="homeCategories">
       <div class="section-header">
         <h2 class="section-title">Shop by <em class="gold-text">category</em></h2>
         <div class="section-num">The Edit</div>
@@ -1915,7 +1973,7 @@
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" id="homeFeatured">
       <div class="section-header">
         <h2 class="section-title"><em class="pink-text">Featured</em> drops</h2>
         <div class="section-num">New this season</div>
@@ -1940,6 +1998,25 @@
         <div class="section-num">Every piece</div>
       </div>
       <div class="product-grid" id="shopGrid"></div>
+    </div>
+  </section>
+
+  <!-- ========== SALE ========== -->
+  <section class="page" id="page-sale">
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">On <em class="gold-text">sale</em></h2>
+        <div class="section-num" id="saleNum">00 PIECES</div>
+      </div>
+      <div class="product-grid" id="saleGrid"></div>
+      <div class="cart-empty" id="saleEmpty" style="display:none;">
+        <img src="assets/luxe-wordmark.png" alt="Luxe" class="cart-empty-l">
+        <h2>Nothing on sale right now.</h2>
+        <p>New pieces drop every Friday. Check back soon.</p>
+        <a class="btn" onclick="navigate('shop')">Shop the collection
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -2180,10 +2257,56 @@
     } else if (parts[0] === 'product') {
       document.getElementById('page-product').classList.add('active');
       renderProduct(parts[1]);
+    } else if (parts[0] === 'sale') {
+      document.getElementById('page-sale').classList.add('active');
+      renderSale();
     } else if (parts[0] === 'cart') {
       document.getElementById('page-cart').classList.add('active');
       renderCart();
     }
+  }
+
+  // Jump to a section of the home page, navigating home first if needed
+  function goToSection(id) {
+    const hash = window.location.hash.replace('#', '') || 'home';
+    if (hash !== 'home') navigate('home');
+    requestAnimationFrame(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  function renderSale() {
+    const onSale = PRODUCTS.filter(p => p.sale);
+    document.getElementById('saleNum').textContent = `${String(onSale.length).padStart(2,'0')} PIECES`;
+    document.getElementById('saleGrid').innerHTML = onSale.map(productCard).join('');
+    document.getElementById('saleEmpty').style.display = onSale.length ? 'none' : '';
+  }
+
+  // ========== MEGA MENU ==========
+  function populateMegaMenu() {
+    const cats = [
+      { id: 'hats', name: 'Hats' },
+      { id: 'shirts', name: 'Shirts' },
+      { id: 'dresses', name: 'Dresses' },
+      { id: 'accessories', name: 'Accessories' },
+    ];
+    document.getElementById('megaInner').innerHTML = cats.map(c => {
+      const items = PRODUCTS.filter(p => p.category === c.id);
+      return `
+        <div>
+          <a class="mega-col-title" onclick="megaGo('category/${c.id}')">${c.name}<span class="mega-count">${String(items.length).padStart(2,'0')}</span></a>
+          ${items.map(p => `<a class="mega-link" onclick="megaGo('product/${p.id}')">${p.name}</a>`).join('')}
+        </div>`;
+    }).join('');
+  }
+
+  function megaGo(route) {
+    // Hide the panel until the pointer leaves and re-enters Shop All
+    const mega = document.getElementById('megaMenu');
+    mega.classList.add('force-closed');
+    setTimeout(() => mega.classList.remove('force-closed'), 500);
+    navigate(route);
   }
 
   // ========== RENDER ==========
@@ -2705,6 +2828,7 @@
 
   // ========== INIT ==========
   window.addEventListener('hashchange', renderRoute);
+  populateMegaMenu();
   renderRoute();
 </script>
 
