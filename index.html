@@ -615,9 +615,14 @@
     margin-left: calc(50% - 50vw);
   }
 
+  /* Tightened so the title and all four cards fit in one viewport */
+  #homeCategories { padding-top: 40px; padding-bottom: 48px; }
+  /* images sit flush against the header's border line */
+  #homeCategories .section-header { margin-bottom: 0; padding-bottom: 16px; }
+
   .category-card {
     position: relative;
-    aspect-ratio: 21/9;
+    aspect-ratio: 23/9;
     overflow: hidden;
     cursor: pointer;
     text-decoration: none;
@@ -1855,14 +1860,14 @@
       <img src="assets/luxe-wordmark.png" alt="Luxe Accessories">
     </a>
     <div class="nav-links">
+      <a onclick="goToSection('homeCategories')">Categories</a>
+      <a onclick="goToSection('homeFeatured')">Featured</a>
       <span class="shop-wrap">
         <a onclick="navigate('shop')">Shop All</a>
         <div class="mega" id="megaMenu">
           <div class="mega-inner" id="megaInner"></div>
         </div>
       </span>
-      <a onclick="goToSection('homeCategories')">Categories</a>
-      <a onclick="goToSection('homeFeatured')">Featured</a>
       <a class="sale-link" onclick="navigate('sale')">Sale</a>
     </div>
     <div class="nav-right">
@@ -1876,9 +1881,9 @@
     </div>
   </nav>
   <div class="mobile-nav">
-    <a onclick="navigate('shop')">Shop All</a>
     <a onclick="goToSection('homeCategories')">Categories</a>
     <a onclick="goToSection('homeFeatured')">Featured</a>
+    <a onclick="navigate('shop')">Shop All</a>
     <a onclick="navigate('sale')">Sale</a>
     <a onclick="navigate('category/hats')">Hats</a>
     <a onclick="navigate('category/shirts')">Shirts</a>
